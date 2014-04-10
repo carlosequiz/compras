@@ -1,0 +1,7 @@
+parameters:
+#    shopping_cart.example.class: Compras\ShoppingCartBundle\Example
+
+services:
+#    shopping_cart.example:
+#        class: %shopping_cart.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,23 @@
+{% extends '::frontend.html.twig' %}
+
+{% block title %}Formulario de acceso{% endblock %}
+{% block id 'usuario' %}
+
+{% block section %}
+
+{% if error %}
+    <div>{{ error.message }}</div>
+{% endif %}
+    <div class="container">
+        <form class="form-signin" role="form" action="{{ path('usuario_login_check') }}" method="post">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <input type="email" class="form-control" placeholder="Email address" id="username" name="_username" value="{{ last_username }}" required autofocus/>
+            <input type="password" class="form-control" placeholder="Password" required id="password" name="_password" />
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me" id="no_cerrar" name="_remember_me" />
+            </label>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit" name="login">Entrar</button>
+        </form>
+    </div>
+{% endblock %}

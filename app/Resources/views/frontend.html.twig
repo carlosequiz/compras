@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {% stylesheets '@CompraBundle/Resources/public/css/bootstrap.css'
+                   '@CompraBundle/Resources/public/css/carousel.css'
+                   '@CompraBundle/Resources/public/css/navbar-fixed-top.css'
+                   '@CompraBundle/Resources/public/css/navbar.css'
+                   '@CompraBundle/Resources/public/css/signin.css'
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+    
+{% block navbar %}{% endblock %}
+    
+    <div class="container">
+
+{% block carousel %}{% endblock %}
+
+{% block section %}{% endblock %}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {% javascripts '@CompraBundle/Resources/public/js/jquery.min.js' 
+                   '@CompraBundle/Resources/public/js/docs.min.js' 
+                   '@CompraBundle/Resources/public/js/bootstrap.js'
+    %}
+    <script src="{{ asset_url }}" type="text/javascript"></script>
+    {% endjavascripts %}
+{% endblock %}

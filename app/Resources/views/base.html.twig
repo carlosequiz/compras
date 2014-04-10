@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>{% block title %}{% endblock %}</title>
+
+        {% block stylesheets %}{% endblock %}
+        
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    
+    <body id="{% block id '' %}"><div id="contenedor">
+        {% block body %}{% endblock %}
+            
+        <footer>
+            <p class="pull-right"><a href="#">Back to top</a></p>
+            <p>&copy; {{ 'now'|date('Y') }} Standard IT Corp, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        </footer>
+            <!--
+            <footer role="contentinfo">
+                <div class="containerCentered containerExtend">
+                    <ul class="footer-main secondaryLink">
+
+                        <li>
+                            <a href="https://www.paypal.com/us/cgi-bin/webscr?cmd=_help">Help</a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.paypal.com/us/cgi-bin/webscr?cmd=_help&amp;t=escalateTab">Contact</a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.paypal.com/us/webapps/mpp/paypal-fees">Fees</a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.paypal.com/us/webapps/mpp/paypal-safety-and-security">Security</a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.paypal.com/us/webapps/mpp/mobile-apps">Apps</a>
+                        </li>
+
+                        <li>
+                            <a href="https://shopping.paypal.com/index">Shop</a>
+                        </li>
+
+
+
+
+                        <li class="country-selector ">
+
+                            <a href="https://www.paypal.com/us/webapps/mpp/country-worldwide" title="See all countries" class="country unitedstates">See all countries</a>
+
+                        </li>
+
+
+
+                        <li class="footer-search">
+
+                            <form method="post" action="
+                                  https://www.paypal-search.com/socialsearch/query
+                                  " class="search-form">
+                                <button class="search-icon" title="Search" type="submit">Search</button>
+
+
+                                <input type="search" name="q" placeholder="Search" />
+
+                                <input type="hidden" name="cn" value="paypal" />
+                                <input type="hidden" name="cc" value="www" />
+                                <input type="hidden" name="adv" value="0" />
+                                <input type="hidden" name="mode" value="caseB" />
+                            </form>
+
+                        </li>
+
+                    </ul>
+
+
+                    <ul class="footer-secondary secondaryLink">
+
+
+                        <li>
+                            <a href="http://www.paypal-media.com/aboutus.cfm" target="_blank">About</a>
+                        </li>
+
+                        <li>
+                            <a href="http://www.thepaypalblog.com/" target="_blank">Blog</a>
+                        </li>
+
+                        <li>
+                            <a href="http://jobs.ebaycareers.com/search/paypal-jobs" target="_blank">Jobs</a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.paypal.com/us/webapps/mpp/full-sitemap">Sitemap</a>
+                        </li>
+
+                        <li>
+                            <a href="http://www.ebay.com/" target="_blank">eBay</a>
+                        </li>
+
+                        <li>
+                            <a href="https://developer.paypal.com/">Developers</a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.paypal.com/us/webapps/mpp/enterprise-home">Enterprise</a>
+                        </li>
+
+                        <li>
+                            <a href="https://www.paypal-marketing.com/emarketing/partner/global/home.page" target="_blank">Partners</a>
+                        </li>
+
+
+                        <li id="siteFeedback">
+
+
+                            <script>
+                                            var feedback_link = '';
+		
+                                                    feedback_link="Feedback";
+		
+                                            var PAYPAL = PAYPAL ? PAYPAL : {};
+                                            PAYPAL.opinionLabVars = {
+                                                    'siteCatalystPageName' 		: '',
+                                                    'siteCatalystC7' 			: '',
+                                                    'siteCatalystAccountNumber' : '',
+                                                    'feedback_link' 			: feedback_link,
+                                                    'isPaymentFlow' 			: false,
+                                                    'isSiteRedirect' 			: false,
+                                                    'languageCode' 				: 'en',
+                                                    'countryCode' 				: 'US',
+                                                    'serverName' 				: 'www.paypal.com',
+                                                    'commentCardCmd' 			: '',
+                                                    'accountNumber'				: '',
+                                                    'miniBrowser'				: false,
+                                                    'sitefb_plus_icon'			: 'https://www.paypalobjects.com/en_US/i/scr/sm_333_oo.gif',
+                                                    'rLogId'					: escape('EU%2FWYcXqKnCw%2B9UpF51qx6Z4cdfBkrXI6uQ6BhlcQJFAK8g89eDed%2FyKN9NA%2FH9%2Brqf4lf4a5Rm1l9uy9%2FAy3DfcvpCsqB58_1448e81039e'),
+                                                    'showSitefbIcon'			: false
+                                            };
+                            </script>
+                        </li>
+                    </ul>
+
+
+                    <ul class="footer-tertiary secondaryLink">
+                        <li id="footer-copyright">© 1999 - 2014 PayPal</li>
+
+
+                        <li id="footer-privacy">
+                            <a href="https://www.paypal.com/us/cgi-bin/webscr?cmd=p/gen/ua/policy_privacy-outside">Privacy</a>
+                        </li>
+                        <li id="footer-legal">
+                            <a href="https://www.paypal.com/us/cgi-bin/webscr?cmd=p/gen/ua/ua-outside">Legal</a>
+                        </li>
+
+
+
+                    </ul>
+
+                </div>
+            </footer> -->
+
+        {% block javascripts %}{% endblock %}
+    </div></body>
+</html>

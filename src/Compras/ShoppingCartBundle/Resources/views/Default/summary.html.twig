@@ -1,0 +1,18 @@
+{% extends '::frontend.html.twig' %}
+
+{% block section %}
+
+<h1>{{ "Carrito de Compra" | trans }}</h1>
+
+{% for item in items %}
+    <div>
+        {{ 'Cantidad' | trans }}
+        {{ 'Precio Unitario' | trans }}
+        {{ 'Total' | trans }}
+        <br>
+    </div>
+{% else %}
+  <h1>NO HAY ITEMS</h1>
+{% endfor %}
+  
+{% endblock %}

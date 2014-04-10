@@ -1,0 +1,25 @@
+{% extends '::frontend.html.twig' %}
+
+{% block title %}Compras, cada día ofertas increíbles en tu ciudad con descuentos de hasta el 90%{% endblock %}
+{% block id '' %}
+
+{% block navbar %}
+    {% include 'CompraBundle:Default:navbar.html.twig' %}
+{% endblock %}
+
+{% block section %}
+<div class="container-fluid">
+    <table class="table-striped">
+        <thead>
+            <td>Nombre</td>
+            <td>Descripción</td>
+        </thead>
+        {% for producto in productos %}
+        <tr>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.descripcion }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

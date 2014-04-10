@@ -1,0 +1,55 @@
+<!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{ path('portada') }}">Compras Online</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="{{ path('portada') }}">Home</a></li>
+            <li><a href="{{ path('productos') }}">Productos</a></li>
+            <li><a href="{{ path('contacto') }}">Contacto</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nuestros Productos <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                {% render url('latest_productos', { 'max': 3 }) %}
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="{{ path('productos') }}">Catálogo Productos</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Buscar productos">
+                </div>
+                <button type="submit" class="btn btn-default">Buscar</button>
+            </form>
+          <ul class="nav navbar-nav navbar-right">
+            {# el usuario está logueado #}
+            {% if is_granted('ROLE_USUARIO') %}
+                <li><a href="#">{{ app.user }}</a></li>
+                <li><a href="{{ path('usuario_logout') }}">Salir</a></li>
+            {# el usuario todavía no ha hecho login #}
+            {% else %}
+                <li><a href="{{ path('usuario_registro') }}">Registrarse</a></li>
+                <li class="divider-vertical"></li>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+                  <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+                    {% include 'UsuarioBundle:Default:cajaLogin.html.twig' %}
+                  </div>
+                </li>
+                <li class="active"><a href="{{ path('usuario_login') }}">Sign In</a></li>
+            {% endif %}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>

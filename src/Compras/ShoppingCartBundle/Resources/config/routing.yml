@@ -1,0 +1,3 @@
+shopping_cart_summary:
+    pattern: /summary
+    defaults: { _controller: ShoppingCartBundle:Default:summary }

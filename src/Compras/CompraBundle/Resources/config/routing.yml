@@ -1,0 +1,7 @@
+productos:
+    pattern: /productos
+    defaults: { _controller: CompraBundle:Default:listaproductos }
+    
+latest_productos:
+    pattern:  /productos/latest/{max}
+    defaults: { _controller: CompraBundle:Default:recentProductos }

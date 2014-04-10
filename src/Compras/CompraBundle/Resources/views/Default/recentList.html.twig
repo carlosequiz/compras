@@ -1,0 +1,5 @@
+{% for producto in productos %}
+    <li>
+        <a href="/producto/{{ producto.slug }}">{{ producto.nombre }}</a>
+    </li>
+{% endfor %}

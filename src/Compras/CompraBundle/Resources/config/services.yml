@@ -1,0 +1,7 @@
+parameters:
+#    compra.example.class: Compras\CompraBundle\Example
+
+services:
+#    compra.example:
+#        class: %compra.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

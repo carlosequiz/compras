@@ -1,0 +1,56 @@
+{% extends '::frontend.html.twig' %}
+
+{% block title %}Compras, cada día ofertas increíbles en tu ciudad con descuentos de hasta el 90%{% endblock %}
+{% block id 'pagina' %}
+
+{% block navbar %}
+    {% include 'CompraBundle:Default:navbarFixed.html.twig' %}
+{% endblock %}
+
+{% block section %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Contáctanos</h3>
+            <hr>
+            <address>
+                <strong>Email:</strong> <a href="mailto:#"> name@domain.com</a><br><br>
+                <strong>Phone:</strong> (555)123-4567
+            </address>
+        </div>
+    </div>
+
+    <div class="col-sm-8 contact-form">
+        <form action="{{ path('contacto') }}" method="post" {{ form_enctype(formulario) }}>
+            {{ form_errors(formulario) }}
+            <div class="row">
+                <div class="col-xs-6 col-md-6 form-group">
+                    {{ form_label(formulario.nombre) }}
+                    {{ form_errors(formulario.nombre) }}
+                    {{ form_widget(formulario.nombre, { 'attr': { 'class': 'form-control' } }) }}
+                </div>
+                <div class="col-xs-6 col-md-6 form-group">
+                    {{ form_label(formulario.remitente) }}
+                    {{ form_errors(formulario.remitente) }}
+                    {{ form_widget(formulario.remitente, { 'attr': { 'class': 'form-control' } }) }}
+                    <!--<input class="form-control" id="email" name="email" placeholder="Email" type="email" required />-->
+                </div>
+                
+                {{ form_widget(formulario.mensaje, { 'attr': { 'class': 'form-control' } }) }}
+
+                {{ form_rest(formulario) }}
+            </div>
+            <!--<textarea class="form-control" id="message" name="message" placeholder="Message" rows="5"></textarea>-->
+            <br />
+            <div class="row">
+                <div class="col-xs-12 col-md-12 form-group">
+                    <button class="btn btn-primary pull-right" type="submit">Submit</button>
+                </div>
+            </div>
+         </form>
+            
+
+    </div>
+</div>
+
+{% endblock %}

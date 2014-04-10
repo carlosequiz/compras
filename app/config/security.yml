@@ -1,0 +1,36 @@
+security:
+    encoders:
+        Compras\UsuarioBundle\Entity\Usuario:        { algorithm: sha512, iterations: 10 }
+        Compras\CompraBundle\Entity\Tienda:          { algorithm: sha512, iterations: 10 }
+        Symfony\Component\Security\Core\User\User: sha512
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        usuarios:
+            entity: { class: Compras\UsuarioBundle\Entity\Usuario, property: email }
+
+    firewalls:
+        
+        # Firewall global utilizado en la parte pública o frontend
+        frontend:
+            pattern:    ^/*
+            anonymous:  ~
+            form_login:
+                login_path: usuario_login
+                check_path: usuario_login_check
+            logout:
+                path:       usuario_logout
+                # quitar una vez se actualice php a una version mayor a la 5.4.9
+                invalidate_session: false
+            remember_me:
+                key:        compras1234
+                lifetime:   604800  # 604.800 = 3.600 * 24 * 7 = 1 semana
+            switch_user: { role: ROLE_ADMIN }
+
+    access_control:
+        - { path: ^/usuario/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/usuario/registro, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/productos, roles: ROLE_USUARIO }

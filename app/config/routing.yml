@@ -1,0 +1,50 @@
+ShoppingCart:
+    resource: "@ShoppingCartBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/cart
+    requirements:
+        _locale: en|es
+    defaults:
+        _locale: es
+
+compra:
+    resource: "@CompraBundle/Resources/config/routing.yml"
+    prefix:   /
+
+# Rutas importadas del bundle UsuarioBundle
+UsuarioBundle:
+    resource: "@UsuarioBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}/usuario
+    requirements:
+        _locale: en|es
+    defaults:
+        _locale: es
+        
+sonata:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix:   /admin
+
+_sonata_admin:
+    resource: .
+    type:     sonata_admin
+    prefix:   /admin        
+
+
+# Ruta de la portada completa del sitio (con _locale y el slug de la ciudad)
+portada:
+    pattern:  /{_locale}
+    defaults: { _controller: CompraBundle:Default:portada, _locale: es }
+    requirements:
+        _locale: en|es
+
+# Ruta de la portada básica del sitio (sin ningún parámetro)
+# esta ruta es opcional, ya que la aplicación puede funcionar bien
+# solamente con la ruta 'portada' y sus valores por defecto
+_portada:
+     pattern:  /
+     defaults: { _controller: FrameworkBundle:Redirect:redirect, route: portada }
+     
+contacto:
+    pattern:   /{_locale}/contacto
+    defaults: { _controller: CompraBundle:Default:contacto, _locale: es }
+    requirements:
+        _locale: en|es
