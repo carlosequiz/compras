@@ -10,11 +10,11 @@ class DefaultController extends Controller
     {
         $em = $this->get('doctrine.orm.entity_manager');
         
-        $items = $em->getRepository('ShoppingCartBundle:CartItem')->findAll();
+        $cart = $em->getRepository('ShoppingCartBundle:Cart')->findCart();
         
         return $this->render(
                     'ShoppingCartBundle:Default:summary.html.twig', array(
-                    'items' => $items
+                    'cart' => $cart
         ));
     }
 }

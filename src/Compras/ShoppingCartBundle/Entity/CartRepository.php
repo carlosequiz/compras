@@ -12,4 +12,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class CartRepository extends EntityRepository
 {
+    public function findCart()
+    {
+        $em = $this->getEntityManager($id = 2);
+        
+        $consulta = $em->createQuery('
+                SELECT c, i
+                  FROM ShoppingCartBundle:Cart c
+                  JOIN c.items i
+                 WHERE c.id = :id
+              ORDER BY i.cantidad DESC');
+        
+        //$consulta->setMaxResults();
+        $consulta->setParameter('id', $id);
+        
+        return $consulta->getResult();
+    }
 }

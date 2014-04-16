@@ -59,6 +59,17 @@ class Cart
      * @ORM\Column(name="estado", type="integer")
      */
     private $estado;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="CartItem", mappedBy="cart")
+     */
+    protected $items;
+
+    
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
 
 
     /**
@@ -184,5 +195,38 @@ class Cart
     public function getEstado()
     {
         return $this->estado;
+    }
+
+    /**
+     * Add items
+     *
+     * @param \Compras\ShoppingCartBundle\Entity\CartItem $items
+     * @return Cart
+     */
+    public function addItem(\Compras\ShoppingCartBundle\Entity\CartItem $items)
+    {
+        $this->items[] = $items;
+
+        return $this;
+    }
+
+    /**
+     * Remove items
+     *
+     * @param \Compras\ShoppingCartBundle\Entity\CartItem $items
+     */
+    public function removeItem(\Compras\ShoppingCartBundle\Entity\CartItem $items)
+    {
+        $this->items->removeElement($items);
+    }
+
+    /**
+     * Get items
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getItems()
+    {
+        return $this->items;
     }
 }

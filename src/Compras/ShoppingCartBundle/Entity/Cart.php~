@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Compras\ShoppingCartBundle\Entity\CartRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Cart
 {
@@ -30,24 +31,27 @@ class Cart
 
     /**
      * @var \DateTime
+     * 
+     * @ORM\Column(name="created_at", type="datetime")
      *
-     * @ORM\Column(name="createdAt", type="datetime")
      */
-    private $createdAt;
+    private $created_at;
 
     /**
      * @var \DateTime
+     * 
+     * @ORM\Column(name="updated_at", type="datetime")
      *
-     * @ORM\Column(name="updatedAt", type="datetime")
      */
-    private $updatedAt;
+    private $updated_at;
 
     /**
      * @var \DateTime
+     * 
+     * @ORM\Column(name="deleted_at", type="datetime")
      *
-     * @ORM\Column(name="deletedAt", type="datetime")
      */
-    private $deletedAt;
+    private $deleted_at;
 
     /**
      * @var integer
@@ -55,6 +59,17 @@ class Cart
      * @ORM\Column(name="estado", type="integer")
      */
     private $estado;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="CartItem", mappedBy="cart")
+     */
+    protected $items;
+
+    
+    public function __construct()
+    {
+        $this->items = new ArrayCollection();
+    }
 
 
     /**
@@ -89,74 +104,74 @@ class Cart
     {
         return $this->itemsTotal;
     }
-
+    
     /**
-     * Set createdAt
+     * Set created_at
      *
-     * @param \DateTime $createdAt
-     * @return Cart
+     * @ORM\PrePersist
+     * @return Orden
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt()
     {
-        $this->createdAt = $createdAt;
+        $this->created_at = new \DateTime();
 
         return $this;
     }
 
     /**
-     * Get createdAt
+     * Get created_at
      *
      * @return \DateTime 
      */
     public function getCreatedAt()
     {
-        return $this->createdAt;
+        return $this->created_at;
     }
 
     /**
-     * Set updatedAt
+     * Set updated_at
      *
-     * @param \DateTime $updatedAt
-     * @return Cart
+     * @ORM\PreUpdate
+     * @return Orden
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt()
     {
-        $this->updatedAt = $updatedAt;
+        $this->updated_at = new \DateTime();
 
         return $this;
     }
 
     /**
-     * Get updatedAt
+     * Get updated_at
      *
      * @return \DateTime 
      */
     public function getUpdatedAt()
     {
-        return $this->updatedAt;
+        return $this->updated_at;
     }
 
     /**
-     * Set deletedAt
+     * Set deleted_at
      *
-     * @param \DateTime $deletedAt
-     * @return Cart
+     * @ORM\PreUpdate
+     * @return Orden
      */
-    public function setDeletedAt($deletedAt)
+    public function setDeletedAt()
     {
-        $this->deletedAt = $deletedAt;
+        $this->deleted_at = new \DateTime();
 
         return $this;
     }
 
     /**
-     * Get deletedAt
+     * Get deleted_at
      *
      * @return \DateTime 
      */
     public function getDeletedAt()
     {
-        return $this->deletedAt;
+        return $this->deleted_at;
     }
 
     /**

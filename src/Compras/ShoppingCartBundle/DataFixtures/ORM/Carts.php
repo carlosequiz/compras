@@ -37,6 +37,9 @@ class Carts extends AbstractFixture implements OrderedFixtureInterface, Containe
 
             $cart->setItemsTotal(1);
             $cart->setEstado(1);
+            $cart->setCreatedAt();
+            $cart->setUpdatedAt();
+            $cart->setDeletedAt();
             
             $manager->persist($cart);
             
