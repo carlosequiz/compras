@@ -64,6 +64,12 @@ class Cart
      * @ORM\OneToMany(targetEntity="CartItem", mappedBy="cart")
      */
     protected $items;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Usuario", inversedBy="usuario")
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     */
+    protected $usuario;
 
     
     public function __construct()
@@ -195,5 +201,38 @@ class Cart
     public function getEstado()
     {
         return $this->estado;
+    }
+
+    /**
+     * Add items
+     *
+     * @param \Compras\ShoppingCartBundle\Entity\CartItem $items
+     * @return Cart
+     */
+    public function addItem(\Compras\ShoppingCartBundle\Entity\CartItem $items)
+    {
+        $this->items[] = $items;
+
+        return $this;
+    }
+
+    /**
+     * Remove items
+     *
+     * @param \Compras\ShoppingCartBundle\Entity\CartItem $items
+     */
+    public function removeItem(\Compras\ShoppingCartBundle\Entity\CartItem $items)
+    {
+        $this->items->removeElement($items);
+    }
+
+    /**
+     * Get items
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getItems()
+    {
+        return $this->items;
     }
 }

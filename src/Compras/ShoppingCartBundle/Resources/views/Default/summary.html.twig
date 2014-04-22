@@ -4,14 +4,10 @@
 
 <h1>{{ "Carrito de Compra" | trans }}</h1>
 
-<div>
-        {{ 'Total: ' ~ cart.itemsTotal | trans }}
-</div>
-
-{% for item in cart.items %}
+{% for item in cart %}
     <div>
-        {{ 'Cantidad: ' ~ item.cantidad | trans }}
-        {{ 'Precio Unitario: ' ~ item.precioUnitario | trans }}
+        {{ 'Cantidad: ' ~ item.id | trans }}
+        
         <br>
     </div>
 {% else %}

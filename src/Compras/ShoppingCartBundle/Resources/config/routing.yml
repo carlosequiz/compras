@@ -1,3 +1,7 @@
 shopping_cart_summary:
     pattern: /summary
     defaults: { _controller: ShoppingCartBundle:Default:summary }
+
+shopping_cart_additem:
+    pattern: /additem
+    defaults: { _controller: ShoppingCartBundle:Default:additem }

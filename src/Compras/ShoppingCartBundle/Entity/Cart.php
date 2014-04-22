@@ -3,6 +3,7 @@
 namespace Compras\ShoppingCartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Cart
@@ -64,6 +65,12 @@ class Cart
      * @ORM\OneToMany(targetEntity="CartItem", mappedBy="cart")
      */
     protected $items;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Compras\UsuarioBundle\Entity\Usuario", inversedBy="usuario")
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     */
+    protected $usuario;
 
     
     public function __construct()
@@ -228,5 +235,28 @@ class Cart
     public function getItems()
     {
         return $this->items;
+    }
+
+    /**
+     * Set usuario
+     *
+     * @param \Compras\UsuarioBundle\Entity\Usuario $usuario
+     * @return Cart
+     */
+    public function setUsuario(\Compras\UsuarioBundle\Entity\Usuario $usuario = null)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return \Compras\UsuarioBundle\Entity\Usuario 
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
     }
 }
