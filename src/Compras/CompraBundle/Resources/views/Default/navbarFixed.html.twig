@@ -12,7 +12,6 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="{{ path('portada') }}">Home</a></li>
             <li><a href="{{ path('productos') }}">Productos</a></li>
             <li><a href="{{ path('contacto') }}">Contacto</a></li>
             <li class="dropdown">
@@ -39,6 +38,7 @@
                 <li><a href="{{ path('usuario_logout') }}">Salir</a></li>
             {# el usuario todavía no ha hecho login #}
             {% else %}
+                <li><a href="{{ path('shopping_cart_summary') }}">Cart</a></li>
                 <li><a href="{{ path('usuario_registro') }}">Registrarse</a></li>
                 <li class="divider-vertical"></li>
                 <li class="dropdown">

@@ -525,4 +525,27 @@ class Orden
     {
         return $this->items;
     }
+
+    /**
+     * Set delete_at
+     *
+     * @param \DateTime $deleteAt
+     * @return Orden
+     */
+    public function setDeleteAt($deleteAt)
+    {
+        $this->delete_at = $deleteAt;
+
+        return $this;
+    }
+
+    /**
+     * Get delete_at
+     *
+     * @return \DateTime 
+     */
+    public function getDeleteAt()
+    {
+        return $this->delete_at;
+    }
 }

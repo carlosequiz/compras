@@ -80,21 +80,29 @@ class Orden
     
     /**
      * @var \DateTime
+     * 
+     * @ORM\Column(name="completed_at", type="datetime")
      */
     private $completed_at;
 
     /**
      * @var \DateTime
+     * 
+     * @ORM\Column(name="created_at", type="datetime")
      */
     private $created_at;
 
     /**
      * @var \DateTime
+     * 
+     * @ORM\Column(name="updated_at", type="datetime")
      */
     private $updated_at;
 
     /**
      * @var \DateTime
+     * 
+     * @ORM\Column(name="delete_at", type="datetime")
      */
     private $delete_at;
 
@@ -326,14 +334,37 @@ class Orden
     }
 
     /**
-     * Set created_at
+     * Set completed_at
      *
      * @param \DateTime $createdAt
      * @return Orden
      */
-    public function setCreatedAt($createdAt)
+    public function setCompletedAt($completedAt)
     {
-        $this->created_at = $createdAt;
+    $this->completed_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get completed_at
+     *
+     * @return \DateTime 
+     */
+    public function getCompletedAt()
+    {
+        return $this->completed_at;
+    }
+    
+    /**
+     * Set created_at
+     *
+     * @ORM\PrePersist
+     * @return Orden
+     */
+    public function setCreatedAt()
+    {
+        $this->created_at = new \DateTime();
 
         return $this;
     }
@@ -350,13 +381,13 @@ class Orden
 
     /**
      * Set updated_at
-     *
-     * @param \DateTime $updatedAt
+     * @ORM\PreUpdate
+     * 
      * @return Orden
      */
     public function setUpdatedAt($updatedAt)
     {
-        $this->updated_at = $updatedAt;
+        $this->updated_at =  new \DateTime();
 
         return $this;
     }
@@ -373,13 +404,12 @@ class Orden
 
     /**
      * Set deleted_at
-     *
-     * @param \DateTime $deletedAt
+     * @ORM\PreUpdate
      * @return Orden
      */
-    public function setDeletedAt($deletedAt)
+    public function setDeletedAt()
     {
-        $this->deleted_at = $deletedAt;
+        $this->deleted_at = new \DateTime();
 
         return $this;
     }

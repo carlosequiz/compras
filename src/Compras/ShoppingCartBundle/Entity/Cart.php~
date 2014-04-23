@@ -3,6 +3,7 @@
 namespace Compras\ShoppingCartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Cart
@@ -40,7 +41,7 @@ class Cart
     /**
      * @var \DateTime
      * 
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      *
      */
     private $updated_at;
@@ -48,7 +49,7 @@ class Cart
     /**
      * @var \DateTime
      * 
-     * @ORM\Column(name="deleted_at", type="datetime")
+     * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      *
      */
     private $deleted_at;
@@ -66,7 +67,7 @@ class Cart
     protected $items;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Usuario", inversedBy="usuario")
+     * @ORM\ManyToOne(targetEntity="Compras\UsuarioBundle\Entity\Usuario", inversedBy="usuario")
      * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
      */
     protected $usuario;
@@ -234,5 +235,28 @@ class Cart
     public function getItems()
     {
         return $this->items;
+    }
+
+    /**
+     * Set usuario
+     *
+     * @param \Compras\UsuarioBundle\Entity\Usuario $usuario
+     * @return Cart
+     */
+    public function setUsuario(\Compras\UsuarioBundle\Entity\Usuario $usuario = null)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return \Compras\UsuarioBundle\Entity\Usuario 
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
     }
 }

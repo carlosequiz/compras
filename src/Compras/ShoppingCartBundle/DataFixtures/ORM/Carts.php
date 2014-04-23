@@ -35,7 +35,7 @@ class Carts extends AbstractFixture implements OrderedFixtureInterface, Containe
                 
             $cart = new Cart();
 
-            $cart->setItemsTotal(1);
+            $cart->setItemsTotal(2);
             $cart->setEstado(1);
             $cart->setCreatedAt();
             $cart->setUpdatedAt();
@@ -46,11 +46,22 @@ class Carts extends AbstractFixture implements OrderedFixtureInterface, Containe
             $cartItem = new CartItem();
             $cartItem->setCantidad(1);
             $cartItem->setCart($cart);
-            
+      
             $producto = $productos[array_rand($productos)];
             $cartItem->setProducto($producto);
             
             $cartItem->setPrecioUnitario(10.5);
+
+            $manager->persist($cartItem);
+            
+            $cartItem = new CartItem();
+            $cartItem->setCantidad(2);
+            $cartItem->setCart($cart);
+      
+            $producto = $productos[array_rand($productos)];
+            $cartItem->setProducto($producto);
+            
+            $cartItem->setPrecioUnitario(15.5);
 
             $manager->persist($cartItem);
             

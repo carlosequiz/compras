@@ -23,8 +23,10 @@ class DefaultController extends Controller
         
         $em = $this->get('doctrine.orm.entity_manager');
         
-        $cart = $em->getRepository('ShoppingCartBundle:Cart')->findCart($usuario->getId());
+        //$cart = $em->getRepository('ShoppingCartBundle:Cart')->findCart($usuario->getId());
+        $cart = $em->getRepository('ShoppingCartBundle:Cart')->findOneByUsuario($usuario->getId());
         $producto = $em->getRepository('CompraBundle:Producto')->find(302);
+        
         
         if(null == $cart)
         {
@@ -37,6 +39,7 @@ class DefaultController extends Controller
             $em->persist($cart);
             $em->flush();
         }
+        
         
         $cartItem = new CartItem();
         
