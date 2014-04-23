@@ -46,7 +46,7 @@ class Producto
     /**
      * @var string
      *
-     * @ORM\Column(name="rutafoto", type="string", length=255)
+     * @ORM\Column(name="rutafoto", type="string", length=255, nullable=true)
      */
     private $rutafoto;
 
@@ -60,7 +60,7 @@ class Producto
     /**
      * @var decimal
      *
-     * @ORM\Column(name="descuento", type="decimal", scale=2)
+     * @ORM\Column(name="descuento", type="decimal", scale=2, nullable=true)
      */
     private $descuento;
 
@@ -74,7 +74,7 @@ class Producto
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fecha_expiracion", type="datetime")
+     * @ORM\Column(name="fecha_expiracion", type="datetime", nullable=true)
      */
     private $fechaExpiracion;
     
