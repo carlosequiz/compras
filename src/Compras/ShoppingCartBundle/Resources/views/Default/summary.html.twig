@@ -2,11 +2,11 @@
 
 {% block section %}
 
-<h1>{{ "Carrito de Compra" | trans }}</h1>
+<h4>{{ "Carrito de Compra" | trans }}</h4>
 
-{% for item in cart %}
+{% for item in items %}
     <div>
-        {{ 'Cantidad: ' ~ item.id }}
+        {{ 'Id: ' ~ item.id }}
         
         <br>
     </div>

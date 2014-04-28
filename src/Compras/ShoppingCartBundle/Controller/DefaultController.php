@@ -51,6 +51,12 @@ class DefaultController extends Controller
         $em->persist($cartItem);
         $em->flush();
         
+        $total = $cart->getItemsTotal();
+        $cart->setItemsTotal($total++);
+        
+        $em->persist($cart);
+        $em->flush();
+        
         return $this->redirect($this->generateUrl('shopping_cart_summary'));
     }
     
@@ -69,11 +75,12 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl('usuario_login'));
         }
         
-        $cart = $em->getRepository('ShoppingCartBundle:Cart')->findCart($usuario->getId());
+        $items = $em->getRepository('ShoppingCartBundle:Cart')->findCartItems($usuario->getId());
+        //echo count($items); exit();
         
         return $this->render(
                     'ShoppingCartBundle:Default:summary.html.twig', array(
-                    'cart' => $cart
+                    'items' => $items
         ));
     }
 }

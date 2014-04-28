@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class CartRepository extends EntityRepository
 {
-    public function findCart($usuario_id = 0)
+    public function findCartItems($usuario_id = 0)
     {
         $em = $this->getEntityManager();
         
@@ -24,9 +24,15 @@ class CartRepository extends EntityRepository
                    AND c.estado = 1
               ORDER BY i.cantidad DESC');
         
-        //$consulta->setMaxResults();
         $consulta->setParameter('usuario_id', $usuario_id);
         
+        $carts = $consulta->getResult();
+        foreach($carts as $cart)
+        {
+            echo $cart->getId()."<br>";
+        }
+        
+        exit();
         return $consulta->getResult();
     }
 }
