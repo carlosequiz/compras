@@ -3,5 +3,13 @@ shopping_cart_summary:
     defaults: { _controller: ShoppingCartBundle:Default:summary }
 
 shopping_cart_additem:
-    pattern: /additem
+    pattern: /{id}/additem
     defaults: { _controller: ShoppingCartBundle:Default:additem }
+
+shopping_cart_updateitem:
+    pattern: /{id}/updateitem
+    defaults: { _controller: ShoppingCartBundle:Default:updateitem }
+    
+shopping_cart_removeitem:
+    pattern: /{id}/removeitem
+    defaults: { _controller: ShoppingCartBundle:Default:removeitem }

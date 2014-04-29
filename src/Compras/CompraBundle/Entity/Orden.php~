@@ -25,7 +25,7 @@ class Orden
     /**
      * @var integer
      *
-     * @ORM\Column(name="direccion_envio_id", type="integer")
+     * @ORM\Column(name="direccion_envio_id", type="integer", nullable=true)
      */
     private $direccionEnvioId;
 
@@ -46,7 +46,7 @@ class Orden
     /**
      * @var integer
      *
-     * @ORM\Column(name="coupon_id", type="integer")
+     * @ORM\Column(name="coupon_id", type="integer", nullable=true)
      */
     private $couponId;
 
@@ -81,7 +81,7 @@ class Orden
     /**
      * @var \DateTime
      * 
-     * @ORM\Column(name="completed_at", type="datetime")
+     * @ORM\Column(name="completed_at", type="datetime", nullable=true)
      */
     private $completed_at;
 
@@ -95,14 +95,14 @@ class Orden
     /**
      * @var \DateTime
      * 
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updated_at;
 
     /**
      * @var \DateTime
      * 
-     * @ORM\Column(name="delete_at", type="datetime")
+     * @ORM\Column(name="delete_at", type="datetime", nullable=true)
      */
     private $delete_at;
 
@@ -116,14 +116,14 @@ class Orden
     /**
      * @var string
      *
-     * @ORM\Column(name="pago_estado", type="string", length=255)
+     * @ORM\Column(name="pago_estado", type="string", length=255, nullable=true)
      */
     private $pagoEstado;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="envio_estado", type="string", length=255)
+     * @ORM\Column(name="envio_estado", type="string", length=255, nullable=true)
      */
     private $envioEstado;
     
@@ -524,5 +524,28 @@ class Orden
     public function getItems()
     {
         return $this->items;
+    }
+
+    /**
+     * Set delete_at
+     *
+     * @param \DateTime $deleteAt
+     * @return Orden
+     */
+    public function setDeleteAt($deleteAt)
+    {
+        $this->delete_at = $deleteAt;
+
+        return $this;
+    }
+
+    /**
+     * Get delete_at
+     *
+     * @return \DateTime 
+     */
+    public function getDeleteAt()
+    {
+        return $this->delete_at;
     }
 }

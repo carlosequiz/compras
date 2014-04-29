@@ -17,22 +17,15 @@ class CartRepository extends EntityRepository
         $em = $this->getEntityManager();
         
         $consulta = $em->createQuery('
-                SELECT c, i
-                  FROM ShoppingCartBundle:Cart c
-                  JOIN c.items i
+                SELECT  i, p
+                  FROM ShoppingCartBundle:CartItem i
+                  JOIN i.cart c
+                  JOIN i.producto p
                  WHERE c.usuario = :usuario_id
-                   AND c.estado = 1
-              ORDER BY i.cantidad DESC');
-        
+                   AND c.estado = 1');
+                
         $consulta->setParameter('usuario_id', $usuario_id);
         
-        $carts = $consulta->getResult();
-        foreach($carts as $cart)
-        {
-            echo $cart->getId()."<br>";
-        }
-        
-        exit();
         return $consulta->getResult();
     }
 }

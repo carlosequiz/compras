@@ -63,11 +63,12 @@ class Cart
     
     /**
      * @ORM\OneToMany(targetEntity="CartItem", mappedBy="cart")
+     * @ORM\JoinColumn(name="id", referencedColumnName="cart_id")
      */
     protected $items;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Compras\UsuarioBundle\Entity\Usuario", inversedBy="usuario")
+     * @ORM\ManyToOne(targetEntity="Compras\UsuarioBundle\Entity\Usuario", inversedBy="carts")
      * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
      */
     protected $usuario;

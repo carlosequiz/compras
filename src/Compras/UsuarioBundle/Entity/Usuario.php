@@ -3,6 +3,7 @@
 namespace Compras\UsuarioBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -91,11 +92,18 @@ class Usuario implements UserInterface
      * @ORM\Column(name="ci", type="integer")
      */
     private $ci;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Compras\ShoppingCartBundle\Entity\Cart", mappedBy="usuario")
+     * @ORM\JoinColumn(name="id", referencedColumnName="usuario_id")
+     */
+    protected $carts;
 
     
     public function __construct()
     {
         $this->fechaAlta = new \DateTime();
+        $this->carts = new ArrayCollection();
     }
 
     public function __toString() 
@@ -360,4 +368,37 @@ class Usuario implements UserInterface
         return $this->getEmail();
     }
 
+
+    /**
+     * Add carts
+     *
+     * @param \Compras\ShoppingCartBundle\Entity\Cart $carts
+     * @return Usuario
+     */
+    public function addCart(\Compras\ShoppingCartBundle\Entity\Cart $carts)
+    {
+        $this->carts[] = $carts;
+
+        return $this;
+    }
+
+    /**
+     * Remove carts
+     *
+     * @param \Compras\ShoppingCartBundle\Entity\Cart $carts
+     */
+    public function removeCart(\Compras\ShoppingCartBundle\Entity\Cart $carts)
+    {
+        $this->carts->removeElement($carts);
+    }
+
+    /**
+     * Get carts
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCarts()
+    {
+        return $this->carts;
+    }
 }

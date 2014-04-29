@@ -1,15 +1,19 @@
 {% extends '::frontend.html.twig' %}
 
 {% block title %}Compras, cada día ofertas increíbles en tu ciudad con descuentos de hasta el 90%{% endblock %}
-{% block id '' %}
+{% block id 'productos' %}
 
 {% block navbar %}
-    {% include 'CompraBundle:Default:navbar.html.twig' %}
+    {% include 'CompraBundle:Default:navbarFixed.html.twig' %}
 {% endblock %}
 
 {% block section %}
+<div>
+    </br>
+</div>
+<h3>Lista de Productos</h3>
 <div class="container-fluid">
-    <table class="table-striped">
+    <table class="table-responsive">
         <thead>
             <td>Nombre</td>
             <td>Descripción</td>
@@ -18,7 +22,7 @@
         <tr>
             <td>{{ producto.nombre }}</td>
             <td>{{ producto.descripcion }}</td>
-            <td><a href="{{ path('shopping_cart_additem') }}"><button type="button" class="btn btn-primary">Add to Cart</button></a></td>
+            <td><a href="{{ path('shopping_cart_additem', { 'id': producto.id } ) }}"><button type="button" class="btn btn-primary">Add to Cart</button></a></td>
         </tr>
         {% endfor %}
     </table>

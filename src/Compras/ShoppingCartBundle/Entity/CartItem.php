@@ -41,7 +41,7 @@ class CartItem
     protected $producto;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Compras\ShoppingCartBundle\Entity\Cart", inversedBy="items")
+     * @ORM\ManyToOne(targetEntity="Cart", inversedBy="items")
      * @ORM\JoinColumn(name="cart_id", referencedColumnName="id")
      */
     protected $cart;

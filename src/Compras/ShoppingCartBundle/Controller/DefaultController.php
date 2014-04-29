@@ -8,9 +8,11 @@ use Compras\ShoppingCartBundle\Entity\CartItem;
 
 class DefaultController extends Controller
 {
-    public function additemAction()
+    
+    public function additemAction($id)
     {
         $usuario = $this->get('security.context')->getToken()->getUser();
+        $producto_id = $id;
 
         // Solo pueden comprar los usuarios registrados y logueados
         if (null == $usuario || !$this->get('security.context')->isGranted('ROLE_USUARIO')) {
@@ -23,9 +25,11 @@ class DefaultController extends Controller
         
         $em = $this->get('doctrine.orm.entity_manager');
         
-        //$cart = $em->getRepository('ShoppingCartBundle:Cart')->findCart($usuario->getId());
-        $cart = $em->getRepository('ShoppingCartBundle:Cart')->findOneByUsuario($usuario->getId());
-        $producto = $em->getRepository('CompraBundle:Producto')->find(302);
+        $cart = $em->getRepository('ShoppingCartBundle:Cart')->findOneBy(
+                                              array('usuario' => $usuario->getId(),
+                                                     'estado' => 1));
+        
+        $producto = $em->getRepository('CompraBundle:Producto')->find($producto_id);
         
         
         if(null == $cart)
@@ -83,4 +87,23 @@ class DefaultController extends Controller
                     'items' => $items
         ));
     }
+    
+    
+    public function removeitemAction($id)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $entity = $em->getRepository('ShoppingCartBundle:CartItem')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+            );
+        }
+
+        $em->remove($entity);
+        $em->flush();
+    
+        return $this->redirect($this->generateUrl('shopping_cart_summary'));
+    }
+
 }
