@@ -4,10 +4,13 @@
 {% block title %}Regístrate gratis como usuario{% endblock %}
 
 {% block navbar %}
-    {% include 'CompraBundle:Default:navbar.html.twig' %}
+    {% include 'CompraBundle:Default:navbarFixed.html.twig' %}
 {% endblock %}
 
 {% block section %}
+<div>
+    </br>
+</div>
 <h1>{{ block('title') }}</h1>
 
 <form class="form-horizontal" action="{{ path('usuario_registro') }}" method="post" {{ form_enctype(formulario) }}>

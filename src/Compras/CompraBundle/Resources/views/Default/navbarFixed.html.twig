@@ -17,6 +17,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nuestros Productos <b class="caret"></b></a>
               <ul class="dropdown-menu">
+                <li class="dropdown-header">Ultimos productos</li>
                 {% render url('latest_productos', { 'max': 3 }) %}
                 <li class="divider"></li>
                 <li class="dropdown-header">Nav header</li>
@@ -34,11 +35,17 @@
           <ul class="nav navbar-nav navbar-right">
             {# el usuario está logueado #}
             {% if is_granted('ROLE_USUARIO') %}
+                <li class="divider-vertical"></li>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" href="#" data-toggle="dropdown">Cart <strong class="caret"></strong></a>
+                  <div class="dropdown-menu" style="padding: 30px; padding-bottom: auto;">
+                    {{ render(controller('ShoppingCartBundle:Default:minisummary')) }}
+                  </div>
+                </li>
                 <li><a href="#">{{ app.user }}</a></li>
                 <li><a href="{{ path('usuario_logout') }}">Salir</a></li>
             {# el usuario todavía no ha hecho login #}
             {% else %}
-                <li><a href="{{ path('shopping_cart_summary') }}">Cart</a></li>
                 <li><a href="{{ path('usuario_registro') }}">Registrarse</a></li>
                 <li class="divider-vertical"></li>
                 <li class="dropdown">
@@ -47,7 +54,7 @@
                     {% include 'UsuarioBundle:Default:cajaLogin.html.twig' %}
                   </div>
                 </li>
-                <li class="active"><a href="{{ path('usuario_login') }}">Sign In</a></li>
+                <!--<li class="active"><a href="{{ path('usuario_login') }}">Sign In</a></li>-->
             {% endif %}
           </ul>
         </div><!--/.nav-collapse -->

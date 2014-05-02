@@ -64,6 +64,21 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('shopping_cart_summary'));
     }
     
+    public function minisummaryAction()
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        
+        $usuario = $this->get('security.context')->getToken()->getUser();
+        
+        $items = $em->getRepository('ShoppingCartBundle:Cart')->findCartItems($usuario->getId());
+        
+        return $this->render(
+                    'ShoppingCartBundle:Default:minisummary.html.twig', array(
+                    'items' => $items
+        ));
+        
+    }
+    
     public function summaryAction()
     {
         $em = $this->get('doctrine.orm.entity_manager');
