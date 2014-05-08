@@ -95,15 +95,31 @@ class DefaultController extends Controller
         ));
     }
     
-    public function recentProductosAction($max = 3)
+    public function recentProductosListAction($max = 3)
     {
         $em = $this->get('doctrine.orm.entity_manager');
         
         $productos = $em->getRepository('CompraBundle:Producto')->getRecentProductos($max);
-
+        
         return $this->render(
-                    'CompraBundle:Default:recentList.html.twig', array(
+                    'CompraBundle:Default:recentProductsList.html.twig', array(
                     'productos' => $productos
+        ));
+
+    }
+    
+    public function productoAction($slug)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        
+        $producto = $em->getRepository('CompraBundle:Producto')->findProducto($slug);
+        
+        if (!$producto) {
+            throw $this->createNotFoundException('No existe el producto');
+        }
+        
+        return $this->render('CompraBundle:Default:detalle.html.twig', array(
+            'producto'       => $producto
         ));
     }
 }

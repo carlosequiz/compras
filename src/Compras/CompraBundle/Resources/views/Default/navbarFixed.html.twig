@@ -12,7 +12,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="{{ path('productos') }}">Productos</a></li>
+            <li><a href="{{ path('lista_productos') }}">Productos</a></li>
             <li><a href="{{ path('contacto') }}">Contacto</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nuestros Productos <b class="caret"></b></a>
@@ -21,7 +21,7 @@
                 {% render url('latest_productos', { 'max': 3 }) %}
                 <li class="divider"></li>
                 <li class="dropdown-header">Nav header</li>
-                <li><a href="{{ path('productos') }}">Catálogo Productos</a></li>
+                <li><a href="{{ path('lista_productos') }}">Catálogo Productos</a></li>
                 <li><a href="#">One more separated link</a></li>
               </ul>
             </li>

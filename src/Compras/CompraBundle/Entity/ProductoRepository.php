@@ -22,4 +22,19 @@ class ProductoRepository extends EntityRepository
      
       return $q->getResult();
     }
+    
+    public function findProducto($slug)
+    {
+        $em = $this->getEntityManager();
+        
+        $consulta = $em->createQuery('
+            SELECT p
+              FROM CompraBundle:Producto p
+             WHERE p.slug = :slug');
+        
+        $consulta->setParameter('slug', $slug);
+        $consulta->setMaxResults(1);
+        
+        return $consulta->getSingleResult();
+    }
 }

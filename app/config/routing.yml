@@ -6,10 +6,15 @@ ShoppingCart:
     defaults:
         _locale: es
 
-compra:
+# Rutas importadas del bundle CompraBundle
+CompraBundle:
     resource: "@CompraBundle/Resources/config/routing.yml"
-    prefix:   /
-
+    prefix:   /{_locale}
+    requirements:
+        _locale: en|es
+    defaults:
+        _locale: es
+        
 # Rutas importadas del bundle UsuarioBundle
 UsuarioBundle:
     resource: "@UsuarioBundle/Resources/config/routing.yml"

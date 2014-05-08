@@ -1,7 +1,12 @@
-productos:
-    pattern: /productos
-    defaults: { _controller: CompraBundle:Default:listaproductos }
+lista_productos:
+    pattern: /listproductos
+    defaults: { _controller: CompraBundle:Default:listaProductos }
     
 latest_productos:
     pattern:  /productos/latest/{max}
-    defaults: { _controller: CompraBundle:Default:recentProductos }
+    defaults: { _controller: CompraBundle:Default:recentProductosList }
+    
+# Ruta de la página de detalle de un producto
+producto:
+    pattern:  /productos/{slug}
+    defaults: { _controller: CompraBundle:Default:producto }

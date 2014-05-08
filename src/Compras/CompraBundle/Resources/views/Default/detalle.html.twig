@@ -1,0 +1,14 @@
+{% extends '::frontend.html.twig' %}
+
+{% block title %}
+    Detalles de {{ producto.nombre }}
+{% endblock %}
+{% block id 'producto' %}
+
+{% block navbar %}
+    {% include 'CompraBundle:Default:navbarFixed.html.twig' %}
+{% endblock %}    
+
+{% block section %}
+    {% include 'CompraBundle:Default:includes/producto.html.twig' %}
+{% endblock %}

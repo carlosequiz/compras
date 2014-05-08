@@ -1,0 +1,12 @@
+<div class="content">
+    <h2><a href="{{ path('producto', { 'slug':producto.slug }) }}">{{ producto.nombre }}</a></h2>
+        
+        {{ producto.descripcion | mostrar_como_lista }}
+        
+        <p>
+            {{ producto.precio }} <span class="glyphicon glyphicon-usd"></span>
+            <span>{{ descuento(producto.precio, producto.descuento) }}</span>
+        </p>
+        
+        <a href="{{ path('shopping_cart_additem', { 'id': producto.id } ) }}"><button type="button" class="btn btn-primary">Add to Cart</button></a>
+</div>

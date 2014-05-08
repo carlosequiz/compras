@@ -13,18 +13,8 @@
 </div>
 <h3>Lista de Productos</h3>
 <div class="container-fluid">
-    <table class="table-responsive">
-        <thead>
-            <td>Nombre</td>
-            <td>Descripción</td>
-        </thead>
         {% for producto in productos %}
-        <tr>
-            <td>{{ producto.nombre }}</td>
-            <td>{{ producto.descripcion }}</td>
-            <td><a href="{{ path('shopping_cart_additem', { 'id': producto.id } ) }}"><button type="button" class="btn btn-primary">Add to Cart</button></a></td>
-        </tr>
+            {% include 'CompraBundle:Default:includes/miniproducto.html.twig' %}
         {% endfor %}
-    </table>
 </div>
 {% endblock %}
