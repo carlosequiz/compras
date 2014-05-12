@@ -15,6 +15,8 @@
 <div class="container-fluid">
         {% for producto in productos %}
             {% include 'CompraBundle:Default:includes/miniproducto.html.twig' %}
+        {% else %}
+            <div class="notice">No se encontraron productos</div>
         {% endfor %}
 </div>
 {% endblock %}

@@ -1,0 +1,7 @@
+NoticiaBundle_noticias:
+    pattern:  /noticias
+    defaults: { _controller: NoticiaBundle:Default:index }
+
+NoticiaBundle_noticeView:
+    pattern:  /leerNoticia/{notice_id}
+    defaults: { _controller: NoticiaBundle:Default:noticeView }

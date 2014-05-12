@@ -1,0 +1,7 @@
+backend_portada:
+    pattern: /
+    defaults: { _controller: BackendBundle:Producto:index }
+
+backend_producto:
+    resource: "@BackendBundle/Resources/config/routing/producto.yml"
+    prefix:   /producto

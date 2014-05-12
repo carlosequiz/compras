@@ -1,5 +1,5 @@
 <div class="content">
-    <h2><a href="{{ path('producto', { 'slug':producto.slug }) }}">{{ producto.nombre }}</a></h2>
+    <h2><a href="{{ path('producto_detalle', { 'slug':producto.slug }) }}">{{ producto.nombre }}</a></h2>
         
         {{ producto.descripcion | mostrar_como_lista }}
         

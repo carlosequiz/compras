@@ -122,4 +122,39 @@ class DefaultController extends Controller
             'producto'       => $producto
         ));
     }
+    
+    public function verProductosAction()
+    {
+        return $this->render('CompraBundle:Default:ver_productos.html.twig', array());
+    }
+    
+    public function listarAction()
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        
+        $productos = $em->getRepository('CompraBundle:Producto')->findAll();
+        
+        return $this->render(
+                    'CompraBundle:Default:listar.html.twig', array(
+                    'productos' => $productos
+        ));
+    }
+    
+    /**
+     * Muestra el formulario de búsqueda de productos
+     *
+     */
+    public function buscarProductoAction()
+    {
+        $peticion = $this->getRequest();
+        $em = $this->get('doctrine.orm.entity_manager');
+
+        $productos = $em->getRepository('CompraBundle:Producto')->getProductosByNombre($peticion->get("buscar"));
+        
+        return $this->render(
+                    'CompraBundle:Default:listaProductos.html.twig', array(
+                    'productos' => $productos
+        ));
+        
+    }
 }

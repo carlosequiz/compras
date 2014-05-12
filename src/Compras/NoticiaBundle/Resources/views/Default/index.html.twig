@@ -1,0 +1,31 @@
+{% extends 'NoticiaBundle::Default/layout.html.twig'  %}
+
+{% block content %}
+<div>
+    <p>Noticias recientes</p>
+    <ol>
+        {% for index,notice in notices %}
+            <li><a href="{{ path('NoticiaBundle_noticeView', {'notice_id': index}) }}">{{notice.title}}</a></li>
+        {% endfor %}
+    </ol>
+    <div id="notice_viewer">
+    {# en esta capa serán cargadas las noticias por ajax #}
+    </div>
+</div>
+{% endblock content %}
+
+{# extendemos el bloque javascript #}
+{% block javascripts %}
+{{ parent() }} {# incluimos las declaraciones de script del layout, como jQuery #}
+
+<script type="text/javascript">
+{# añadirmos una función al evento click de todos los enlaces a.notice_link, para
+usar AJAX en vez de su comportamiento por defecto #}
+$(document).ready(function(){
+    $('a.notice_link').click(function(event){
+        event.preventDefault(); //cancela el comportamiento por defecto
+        $('#notice_viewer').load($(this).attr('href')); //carga por ajax a la capa "notice_viewer"
+    });
+});
+</script>
+{% endblock javascripts %}

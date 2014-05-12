@@ -1,0 +1,30 @@
+producto:
+    pattern:  /
+    defaults: { _controller: "BackendBundle:Producto:index" }
+
+producto_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BackendBundle:Producto:show" }
+
+producto_new:
+    pattern:  /new
+    defaults: { _controller: "BackendBundle:Producto:new" }
+
+producto_create:
+    pattern:  /create
+    defaults: { _controller: "BackendBundle:Producto:create" }
+    requirements: { _method: post }
+
+producto_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BackendBundle:Producto:edit" }
+
+producto_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BackendBundle:Producto:update" }
+    requirements: { _method: post|put }
+
+producto_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BackendBundle:Producto:delete" }
+    requirements: { _method: post|delete }

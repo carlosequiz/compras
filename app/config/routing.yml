@@ -1,3 +1,11 @@
+BackendBundle:
+    resource: "@BackendBundle/Resources/config/routing.yml"
+    prefix:   /backend
+
+noticia:
+    resource: "@NoticiaBundle/Resources/config/routing.yml"
+    prefix:   /
+
 ShoppingCart:
     resource: "@ShoppingCartBundle/Resources/config/routing.yml"
     prefix:   /{_locale}/cart

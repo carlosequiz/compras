@@ -23,6 +23,20 @@ class ProductoRepository extends EntityRepository
       return $q->getResult();
     }
     
+    public function getProductosByNombre($nombre)
+    {
+        $em = $this->getEntityManager();
+        
+        $consulta = $em->createQuery('
+            SELECT p
+              FROM CompraBundle:Producto p
+             WHERE p.nombre LIKE :nombre');
+        
+        $consulta->setParameter('nombre', '%'.$nombre.'%');
+        
+        return $consulta->getResult();
+    }
+    
     public function findProducto($slug)
     {
         $em = $this->getEntityManager();

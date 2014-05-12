@@ -1,0 +1,8 @@
+{# note que en este caso utilizamos el layout de ajax para así no cargar todo el contenido del layout general #}
+{% extends app.request.isXmlHttpRequest ? "NoticiaBundle::Default/layout_ajax.html.twig" : "NoticiaBundle::Default/layout.html.twig" %}
+{% block content %}
+<div>
+    <h2>{{notice.title}}</h2>
+    <p>{{notice.content}}</p>
+</div>
+{% endblock content %}

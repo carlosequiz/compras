@@ -1,0 +1,7 @@
+parameters:
+#    noticia.example.class: Compras\NoticiaBundle\Example
+
+services:
+#    noticia.example:
+#        class: %noticia.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

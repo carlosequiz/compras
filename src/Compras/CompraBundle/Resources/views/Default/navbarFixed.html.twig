@@ -13,22 +13,22 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="{{ path('lista_productos') }}">Productos</a></li>
-            <li><a href="{{ path('contacto') }}">Contacto</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nuestros Productos <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li class="dropdown-header">Ultimos productos</li>
-                {% render url('latest_productos', { 'max': 3 }) %}
+                    {% render url('latest_productos', { 'max': 3 }) %}
                 <li class="divider"></li>
                 <li class="dropdown-header">Nav header</li>
                 <li><a href="{{ path('lista_productos') }}">Catálogo Productos</a></li>
                 <li><a href="#">One more separated link</a></li>
               </ul>
             </li>
+            <li><a href="{{ path('contacto') }}">Contacto</a></li>
           </ul>
-            <form class="navbar-form navbar-left" role="search">
+            <form action="{{ path('producto_buscar') }}" method="post" accept-charset="UTF-8" class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Buscar productos">
+                    <input type="text" name="buscar" class="form-control" placeholder="Buscar productos">
                 </div>
                 <button type="submit" class="btn btn-default">Buscar</button>
             </form>

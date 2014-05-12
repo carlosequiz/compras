@@ -7,6 +7,19 @@ latest_productos:
     defaults: { _controller: CompraBundle:Default:recentProductosList }
     
 # Ruta de la página de detalle de un producto
-producto:
+producto_detalle:
     pattern:  /productos/{slug}
     defaults: { _controller: CompraBundle:Default:producto }
+
+producto_buscar:
+    pattern: /findproduct
+    defaults: { _controller: CompraBundle:Default:buscarProducto }
+    
+#para hacer prueba de Jquery
+ver_productos:
+    pattern: /ver-productos
+    defaults: { _controller: CompraBundle:Default:verProductos }
+    
+producto_listar:
+    pattern:  /product/listar
+    defaults: { _controller: CompraBundle:Default:listar }

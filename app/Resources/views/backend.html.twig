@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {% stylesheets '@CompraBundle/Resources/public/css/bootstrap.css'
+
+    %}
+    <link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+<header>
+<h1><a href="{{ path('backend_portada') }}">COMPRAS ADMIN</a></h1>
+<nav>
+<ul>
+    <li><a href="{{ path('backend_producto') }}">Productos</a></li>
+</ul>
+</nav>
+</header>
+<article>
+    {% block article %}{% endblock %}
+</article>
+{% endblock %}

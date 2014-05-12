@@ -1,0 +1,51 @@
+{% extends '::backend.html.twig' %}
+
+{% block article %}
+    <h1>Producto list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Precio</th>
+                <th>Descuento</th>
+                <th>Fechapublicacion</th>
+                <th>Fechaexpiracion</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('producto_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.nombre }}</td>
+                <td>{{ entity.descripcion }}</td>
+                <td>{{ entity.precio }}</td>
+                <td>{{ entity.descuento }}</td>
+                <td>{% if entity.fechaPublicacion %}{{ entity.fechaPublicacion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.fechaExpiracion %}{{ entity.fechaExpiracion|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('producto_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('producto_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('producto_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}
