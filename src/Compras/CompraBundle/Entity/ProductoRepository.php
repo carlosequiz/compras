@@ -51,4 +51,21 @@ class ProductoRepository extends EntityRepository
         
         return $consulta->getSingleResult();
     }
+    
+    public function queryTodosLosProductos()
+    {
+        $em = $this->getEntityManager();
+        
+        $consulta = $em->createQuery('
+            SELECT o, t FROM CompraBundle:Producto o
+              JOIN o.tienda t 
+          ORDER BY o.fechaPublicacion DESC');
+        
+        return $consulta;
+    }
+    
+    public function findTodasLosProductos()
+    {
+        return $this->queryTodosLosProductos()->getResult();
+    }
 }

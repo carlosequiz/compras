@@ -4,6 +4,7 @@ namespace Compras\CompraBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Compras\CompraBundle\Util\Util;
+use Symfony\Component\Validator\Constraints AS Assert;
 
 /**
  * Producto
@@ -49,11 +50,17 @@ class Producto
      * @ORM\Column(name="rutafoto", type="string", length=255, nullable=true)
      */
     private $rutafoto;
+    
+    /**
+     * @Assert\Image(maxSize = "500k")
+     */
+    protected $foto;
 
     /**
      * @var decimal
      *
      * @ORM\Column(name="precio", type="decimal", scale=2)
+     * @Assert\Range(min = 0)
      */
     private $precio;
 
@@ -190,6 +197,26 @@ class Producto
     public function getRutafoto()
     {
         return $this->rutafoto;
+    }
+    
+    /**
+     * Set foto.
+     *
+     * @param UploadedFile $foto
+     */
+    public function setFoto(UploadedFile $foto = null)
+    {
+        $this->foto = $foto;
+    }
+
+    /**
+     * Get foto.
+     *
+     * @return UploadedFile
+     */
+    public function getFoto()
+    {
+        return $this->foto;
     }
 
     /**

@@ -64,7 +64,13 @@ class Tienda
      */
     private $salt;
 
-
+    
+    public function __toString()
+    {
+        return $this->nombre;
+    }
+    
+    
     /**
      * Get id
      *

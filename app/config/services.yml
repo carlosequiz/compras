@@ -18,3 +18,12 @@ services:
       class: Compras\CompraBundle\Twig\Extension\CompraExtension
       tags:
           - { name: twig.extension }
+          
+  sonata.compras.admin.producto:
+      class: Compras\CompraBundle\Admin\ProductoAdmin
+      tags:
+          - { name: sonata.admin, manager_type: orm, group: 'Compras', label: Productos }
+      arguments:
+          - null
+          - Compras\CompraBundle\Entity\Producto
+          - CompraBundle:Admin

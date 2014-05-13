@@ -22,11 +22,13 @@ class ProductoController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $paginador = $this->get('ideup.simple_paginator');
 
-        $entities = $em->getRepository('CompraBundle:Producto')->findAll();
+        $entities = $paginador->paginate($em->getRepository('CompraBundle:Producto')->queryTodosLosProductos())->getResult();
 
         return $this->render('BackendBundle:Producto:index.html.twig', array(
-            'entities' => $entities,
+            'entities'  => $entities,
+            'paginador' => $paginador
         ));
     }
     /**

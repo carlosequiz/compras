@@ -39,7 +39,7 @@ sonata:
 _sonata_admin:
     resource: .
     type:     sonata_admin
-    prefix:   /admin        
+    prefix:   /admin
 
 
 # Ruta de la portada completa del sitio (con _locale y el slug de la ciudad)
