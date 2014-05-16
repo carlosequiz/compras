@@ -50,9 +50,7 @@ class DefaultController extends Controller
             $token = new UsernamePasswordToken($usuario, null, 'frontend', $usuario->getRoles());
             $this->container->get('security.context')->setToken($token);
 
-            return $this->redirect($this->generateUrl('portada', array(
-                'ciudad' => $usuario->getCiudad()->getSlug()
-            )));
+            return $this->redirect($this->generateUrl('portada'));
         }
 
         return $this->render('UsuarioBundle:Default:registro.html.twig', array(

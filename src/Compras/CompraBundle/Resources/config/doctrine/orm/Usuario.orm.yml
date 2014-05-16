@@ -1,0 +1,70 @@
+Usuario:
+    type: entity
+    table: Usuario
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: false
+            length: 100
+            fixed: false
+            comment: ''
+        apellidos:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+        email:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+        password:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+        salt:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+        direccion:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+        permiteEmail:
+            type: boolean
+            nullable: false
+            comment: ''
+            column: permite_email
+        fechaNacimiento:
+            type: date
+            nullable: false
+            comment: ''
+            column: fecha_nacimiento
+        fechaAlta:
+            type: datetime
+            nullable: false
+            comment: ''
+            column: fecha_alta
+        ci:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+    lifecycleCallbacks: {  }

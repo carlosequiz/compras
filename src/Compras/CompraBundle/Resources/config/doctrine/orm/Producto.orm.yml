@@ -1,0 +1,75 @@
+Producto:
+    type: entity
+    table: Producto
+    indexes:
+        IDX_5ECD644319BA6D46:
+            columns:
+                - tienda_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nombre:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+        slug:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+        descripcion:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+        precio:
+            type: decimal
+            nullable: false
+            precision: 10
+            scale: 2
+            comment: ''
+        descuento:
+            type: decimal
+            nullable: true
+            precision: 10
+            scale: 2
+            comment: ''
+        fechaPublicacion:
+            type: datetime
+            nullable: false
+            comment: ''
+            column: fecha_publicacion
+        fechaExpiracion:
+            type: datetime
+            nullable: true
+            comment: ''
+            column: fecha_expiracion
+        rutafoto:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+            column: rutaFoto
+    manyToOne:
+        tienda:
+            targetEntity: Tienda
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                tienda_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

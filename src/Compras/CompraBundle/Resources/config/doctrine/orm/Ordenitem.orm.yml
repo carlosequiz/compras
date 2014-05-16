@@ -1,0 +1,40 @@
+Ordenitem:
+    type: entity
+    table: OrdenItem
+    indexes:
+        IDX_96F8249A9750851F:
+            columns:
+                - orden_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        cantidad:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        precioUnitario:
+            type: decimal
+            nullable: false
+            precision: 10
+            scale: 0
+            comment: ''
+            column: precio_unitario
+    manyToOne:
+        orden:
+            targetEntity: Orden
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                orden_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -5,6 +5,7 @@ namespace Compras\CompraBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Compras\CompraBundle\Util\Util;
 use Symfony\Component\Validator\Constraints AS Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Producto
@@ -27,6 +28,7 @@ class Producto
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $nombre;
 
@@ -34,6 +36,7 @@ class Producto
      * @var string
      *
      * @ORM\Column(name="slug", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $slug;
 
@@ -41,15 +44,15 @@ class Producto
      * @var string
      *
      * @ORM\Column(name="descripcion", type="text")
+     * @Assert\NotBlank()
+     * @Assert\Length(min = 30)
      */
     private $descripcion;
-
+    
     /**
-     * @var string
-     *
-     * @ORM\Column(name="rutafoto", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string")
      */
-    private $rutafoto;
+    protected $rutaFoto;
     
     /**
      * @Assert\Image(maxSize = "500k")
@@ -75,6 +78,7 @@ class Producto
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_publicacion", type="datetime")
+     * @Assert\DateTime
      */
     private $fechaPublicacion;
 
@@ -82,6 +86,7 @@ class Producto
      * @var \DateTime
      *
      * @ORM\Column(name="fecha_expiracion", type="datetime", nullable=true)
+     * @Assert\DateTime
      */
     private $fechaExpiracion;
     
@@ -177,26 +182,23 @@ class Producto
     }
 
     /**
-     * Set rutafoto
+     * Set foto.
      *
-     * @param string $rutafoto
-     * @return Producto
+     * @param UploadedFile $foto
      */
-    public function setRutafoto($rutafoto)
+    public function setFoto(UploadedFile $foto = null)
     {
-        $this->rutafoto = $rutafoto;
-
-        return $this;
+        $this->foto = $foto;
     }
 
     /**
-     * Get rutafoto
+     * Get foto.
      *
-     * @return string 
+     * @return UploadedFile
      */
-    public function getRutafoto()
+    public function getFoto()
     {
-        return $this->rutafoto;
+        return $this->foto;
     }
 
     /**
@@ -319,5 +321,53 @@ class Producto
     public function getTienda()
     {
         return $this->tienda;
+    }
+    
+   /**
+    * @Assert\True(message = "La fecha de expiración debe ser posterior a la fecha de publicación")
+    *
+    */
+    public function isFechaValida()
+    {
+        if ($this->fechaPublicacion == null || $this->fechaExpiracion == null)
+        {
+            return true;
+        }
+        
+        return $this->fechaExpiracion > $this->fechaPublicacion;
+    }
+    
+    public function subirFoto($directorioDestino)
+    {
+        if (null === $this->foto) {
+            return;
+        }
+        
+        $nombreArchivoFoto = uniqid('compra-').'-foto1.jpg';
+        $this->foto->move($directorioDestino, $nombreArchivoFoto);
+        $this->setFoto($nombreArchivoFoto);
+    }
+
+    /**
+     * Set rutaFoto
+     *
+     * @param string $rutaFoto
+     * @return Producto
+     */
+    public function setRutaFoto($rutaFoto)
+    {
+        $this->rutaFoto = $rutaFoto;
+
+        return $this;
+    }
+
+    /**
+     * Get rutaFoto
+     *
+     * @return string 
+     */
+    public function getRutaFoto()
+    {
+        return $this->rutaFoto;
     }
 }

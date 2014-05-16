@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends '::backend.html.twig' %}
 
 {% block body -%}
     <h1>Producto</h1>
@@ -22,8 +22,9 @@
                 <td>{{ entity.descripcion }}</td>
             </tr>
             <tr>
-                <th>Rutafoto</th>
-                <td>{{ entity.rutafoto }}</td>
+                <th>Foto</th>
+                <td><img src="{{ asset(directorio_imagenes ~ entity.rutaFoto) }}" />
+                <div class="help-block">(No se muestra a tamaño real)</div></td>
             </tr>
             <tr>
                 <th>Precio</th>

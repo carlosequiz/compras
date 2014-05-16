@@ -1,0 +1,52 @@
+Cartitem:
+    type: entity
+    table: CartItem
+    indexes:
+        IDX_3B24E2CF7645698E:
+            columns:
+                - producto_id
+        IDX_3B24E2CF1AD5CDBF:
+            columns:
+                - cart_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        cantidad:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+        precioUnitario:
+            type: decimal
+            nullable: false
+            precision: 10
+            scale: 0
+            comment: ''
+            column: precio_unitario
+    manyToOne:
+        cart:
+            targetEntity: Cart
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                cart_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        producto:
+            targetEntity: Producto
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                producto_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

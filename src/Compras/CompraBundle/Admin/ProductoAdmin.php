@@ -39,8 +39,8 @@ class ProductoAdmin extends Admin
             ->with('Financieros')
                 ->add('precio')
                 ->add('descuento')
-                ->add('fechaPublicacion', 'datetime')
-                ->add('fechaExpiracion', 'datetime')
+                ->add('fechaPublicacion', 'date')
+                ->add('fechaExpiracion', 'date')
                 ->add('tienda')
             ->end()
         ;

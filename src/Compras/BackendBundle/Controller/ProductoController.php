@@ -37,11 +37,16 @@ class ProductoController extends Controller
      */
     public function createAction(Request $request)
     {
+        
         $entity = new Producto();
+        
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+            
+            $entity->subirFoto($this->container->getParameter('compras.directorio.imagenes'));
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -169,8 +174,22 @@ class ProductoController extends Controller
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
+        
+        $fotoOriginal = $editForm->getData()->getFoto();
 
         if ($editForm->isValid()) {
+            if (null == $entity->getFoto()) {
+                // La foto original no se modifica, recuperar su ruta
+                $entity->setFoto($fotoOriginal);
+            } else {
+                // La foto de la oferta se ha modificado
+                $directorioFotos = $this->container->getParameter(
+                    'cupon.directorio.imagenes'
+                );
+                $entity->subirFoto($directorioFotos);
+                // Borrar la foto anterior
+                unlink($directorioFotos.$fotoOriginal);
+            }
             $em->flush();
 
             return $this->redirect($this->generateUrl('producto_edit', array('id' => $id)));

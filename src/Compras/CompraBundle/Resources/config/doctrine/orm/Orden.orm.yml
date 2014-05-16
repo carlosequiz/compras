@@ -1,0 +1,102 @@
+Orden:
+    type: entity
+    table: Orden
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        direccionEnvioId:
+            type: integer
+            nullable: true
+            unsigned: false
+            comment: ''
+            column: direccion_envio_id
+        direccionFacturacionId:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: direccion_facturacion_id
+        pagoId:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: pago_id
+        couponId:
+            type: integer
+            nullable: true
+            unsigned: false
+            comment: ''
+            column: coupon_id
+        usuarioId:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: usuario_id
+        numero:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+        estadoId:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: estado_id
+        itemstotal:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: itemsTotal
+        completedAt:
+            type: datetime
+            nullable: true
+            comment: ''
+            column: completed_at
+        createdAt:
+            type: datetime
+            nullable: false
+            comment: ''
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: true
+            comment: ''
+            column: updated_at
+        deleteAt:
+            type: datetime
+            nullable: true
+            comment: ''
+            column: delete_at
+        moneda:
+            type: string
+            nullable: false
+            length: 3
+            fixed: false
+            comment: ''
+        pagoEstado:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            comment: ''
+            column: pago_estado
+        envioEstado:
+            type: string
+            nullable: true
+            length: 255
+            fixed: false
+            comment: ''
+            column: envio_estado
+    lifecycleCallbacks: {  }

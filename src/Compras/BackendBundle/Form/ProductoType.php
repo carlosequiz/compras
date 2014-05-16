@@ -16,13 +16,12 @@ class ProductoType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('slug')
             ->add('descripcion')
-            ->add('rutafoto')
-            ->add('precio')
-            ->add('descuento')
-            ->add('fechaPublicacion')
-            ->add('fechaExpiracion')
+            ->add('foto', 'file', array('required' => false))
+            ->add('precio', 'money')
+            ->add('descuento', 'money')
+            ->add('fechaPublicacion', 'date')
+            ->add('fechaExpiracion', 'date')
             ->add('tienda')
         ;
     }
