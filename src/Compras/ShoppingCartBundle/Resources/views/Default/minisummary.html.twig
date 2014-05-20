@@ -1,43 +1,12 @@
-<div class="container-fluid">
 {% if items is empty %}
     Your cart is empty!!
 {% else %}
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nombre de Producto</th>
-            <th>Cantidad</th>
-            <th>Precio</th>
-            <th>Total</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for item in items %}
-        <tr>
-            <td>{{ item.producto }}</td>
-            <td>{{ item.cantidad }}</td>
-            <td>{{ item.precioUnitario }}</td>
-            <td>{{ 'xxxxxxx' }}</td>
-            <td>
-                <div>
-                    <a href="{{ path('shopping_cart_updateitem', { 'id': item.id }) }}">
-                        <button type="button" class="btn btn-small">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                    </a>
-                </div>
-                <div>
-                    <a href="{{ path('shopping_cart_removeitem', { 'id': item.id }) }}">
-                        <button type="button" class="btn btn-small">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                    </a>
-                </div>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    
+{% for item in items %}
+    <li>
+        <a href="#"><img width="50" height="50" src="{{  asset(directorio_imagenes ~ item.producto.rutaFoto) }}" />
+        {{ item.producto }}
+    </li>
+{% endfor %}
+    
 {% endif %}
-</div>

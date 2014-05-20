@@ -4,9 +4,10 @@ namespace Compras\BackendBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Compras\CompraBundle\Entity\Producto;
 use Compras\BackendBundle\Form\ProductoType;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Producto controller.
@@ -21,7 +22,7 @@ class ProductoController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine.orm.entity_manager');
         $paginador = $this->get('ideup.simple_paginator');
 
         $entities = $paginador->paginate($em->getRepository('CompraBundle:Producto')->queryTodosLosProductos())->getResult();
@@ -47,7 +48,7 @@ class ProductoController extends Controller
             
             $entity->subirFoto($this->container->getParameter('compras.directorio.imagenes'));
             
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine.orm.entity_manager');
             $em->persist($entity);
             $em->flush();
 
@@ -100,7 +101,7 @@ class ProductoController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine.orm.entity_manager');
 
         $entity = $em->getRepository('CompraBundle:Producto')->find($id);
 
@@ -121,7 +122,7 @@ class ProductoController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->get('doctrine.orm.entity_manager');
 
         $entity = $em->getRepository('CompraBundle:Producto')->find($id);
 
@@ -150,20 +151,22 @@ class ProductoController extends Controller
     {
         $form = $this->createForm(new ProductoType(), $entity, array(
             'action' => $this->generateUrl('producto_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
+            'method' => 'POST',
         ));
 
         $form->add('submit', 'submit', array('label' => 'Update'));
 
         return $form;
     }
+
     /**
      * Edits an existing Producto entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
-        $em = $this->getDoctrine()->getManager();
+           
+        $em = $this->get('doctrine.orm.entity_manager');
 
         $entity = $em->getRepository('CompraBundle:Producto')->find($id);
 
@@ -175,25 +178,34 @@ class ProductoController extends Controller
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
         
-        $fotoOriginal = $editForm->getData()->getFoto();
-
+        // Guardar la ruta de la foto original de la oferta
+        $rutaFotoOriginal = $editForm->getData()->getRutaFoto();
+        
         if ($editForm->isValid()) {
+            
             if (null == $entity->getFoto()) {
-                // La foto original no se modifica, recuperar su ruta
-                $entity->setFoto($fotoOriginal);
+                    // el usuario no ha modificado la foto original
+                    $entity->setRutaFoto($rutaFotoOriginal);
             } else {
-                // La foto de la oferta se ha modificado
-                $directorioFotos = $this->container->getParameter(
-                    'cupon.directorio.imagenes'
-                );
-                $entity->subirFoto($directorioFotos);
-                // Borrar la foto anterior
-                unlink($directorioFotos.$fotoOriginal);
+                // el usuario ha modificado la foto: copiar la foto subida y
+                // guardar la nueva ruta
+                $entity->subirFoto($this->container->getParameter('compras.directorio.imagenes'));
+
+                // borrar la foto anterior
+                if (!empty($rutaFotoOriginal)) {
+                    //$fs = new Filesystem();
+                    //$fs->remove($this->container->getParameter('compras.directorio.imagenes').$rutaFotoOriginal);
+                    unlink($this->container->getParameter('compras.directorio.imagenes').$rutaFotoOriginal);
+                }
             }
+            
+            $em->persist($entity);
             $em->flush();
 
             return $this->redirect($this->generateUrl('producto_edit', array('id' => $id)));
         }
+        
+        //var_dump($editForm->getErrorsAsString());
 
         return $this->render('BackendBundle:Producto:edit.html.twig', array(
             'entity'      => $entity,
@@ -211,7 +223,7 @@ class ProductoController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->get('doctrine.orm.entity_manager');
             $entity = $em->getRepository('CompraBundle:Producto')->find($id);
 
             if (!$entity) {

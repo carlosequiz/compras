@@ -1,5 +1,5 @@
 <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -38,9 +38,9 @@
                 <li class="divider-vertical"></li>
                 <li class="dropdown">
                   <a class="dropdown-toggle" href="#" data-toggle="dropdown">Cart <strong class="caret"></strong></a>
-                  <div class="dropdown-menu" style="padding: 30px; padding-bottom: auto;">
+                  <ul class="dropdown-menu">
                     {{ render(controller('ShoppingCartBundle:Default:minisummary')) }}
-                  </div>
+                  </ul>
                 </li>
                 <li><a href="#">{{ app.user }}</a></li>
                 <li><a href="{{ path('usuario_logout') }}">Salir</a></li>
