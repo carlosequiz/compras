@@ -51,7 +51,7 @@
                 <li class="dropdown">
                   <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
                   <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-                    {% include 'UsuarioBundle:Default:cajaLogin.html.twig' %}
+                    {{ render_esi(controller('UsuarioBundle:Default:cajaLogin', { 'id': block('id') })) }}
                   </div>
                 </li>
                 <!--<li class="active"><a href="{{ path('usuario_login') }}">Sign In</a></li>-->

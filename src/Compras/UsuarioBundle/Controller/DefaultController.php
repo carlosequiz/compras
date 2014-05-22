@@ -71,5 +71,28 @@ class DefaultController extends Controller
                     'error'         => $error
         ));
     }
+    
+    /**
+     * Muestra la caja de login que se incluye en el lateral de la mayoría de páginas del sitio web.
+     * Esta caja se transforma en información y enlaces cuando el usuario se loguea en la aplicación.
+     * La respuesta se marca como privada para que no se añada a la cache pública. El trozo de plantilla
+     * que llama a esta función se sirve a través de ESI
+     *
+     * @param string $id El valor del bloque `id` de la plantilla,
+     *                   que coincide con el valor del atributo `id` del elemento <body>
+     */
+    public function cajaLoginAction($id = '')
+    {
+        $usuario = $this->get('security.context')->getToken()->getUser();
+
+        $respuesta = $this->render('UsuarioBundle:Default:cajaLogin.html.twig', array(
+            'id'      => $id,
+            'usuario' => $usuario
+        ));
+
+        $respuesta->setMaxAge(30);
+
+        return $respuesta;
+    }
 
 }

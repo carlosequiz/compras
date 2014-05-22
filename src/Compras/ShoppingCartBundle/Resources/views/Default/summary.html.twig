@@ -7,10 +7,14 @@
     {% include 'CompraBundle:Default:navbarFixed.html.twig' %}
 {% endblock %}
 
-{% block section %}
+{% block article %}
+
+<div class="container-fluid">
+
 <div>
     </br>
 </div>
+    
 <h4>{{ "Carrito de Compra" | trans }}</h4>
 
 <table class="table">
@@ -29,7 +33,7 @@
             <td>{{ item.producto }}</td>
             <td>{{ item.cantidad }}</td>
             <td>{{ item.precioUnitario }}</td>
-            <td>{{ 'xxxxxxx' }}</td>
+            <td>{{ item.cantidad * item.precioUnitario }}</td>
             <td>
                 <div>
                     <a href="{{ path('shopping_cart_updateitem', { 'id': item.id }) }}">
@@ -52,5 +56,18 @@
 {% endfor %}
     </tbody>
 </table>
-  
+
+</div>
+{% endblock %}
+
+{% block aside %}
+    <section id="login">
+        {{ render_esi(controller('UsuarioBundle:Default:cajaLogin', { 'id': block('id') })) }}
+    </section>
+
+    <section id="condiciones">
+        <h2>Condiciones generales</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </section>
 {% endblock %}

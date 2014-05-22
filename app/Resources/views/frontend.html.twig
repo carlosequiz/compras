@@ -6,6 +6,8 @@
                    '@CompraBundle/Resources/public/css/navbar-fixed-top.css'
                    '@CompraBundle/Resources/public/css/navbar.css'
                    '@CompraBundle/Resources/public/css/signin.css'
+                   '@CompraBundle/Resources/public/css/frontend.css'
+                   '@CompraBundle/Resources/public/css/comun.css'
     %}
     <link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
     {% endstylesheets %}
@@ -23,12 +25,15 @@
 {% block body %}
     
 {% block navbar %}{% endblock %}
+
+{% block anuncio %}{% endblock %}
+
+<article {{ block('id') }}>
+    {% block article %}{% endblock %}
+</article>
+
+<aside>
+{% block aside %}{% endblock %}
+</aside>
     
-    <div class="container">
-
-{% block carousel %}{% endblock %}
-
-{% block section %}{% endblock %}
-
-    </div>
 {% endblock %}

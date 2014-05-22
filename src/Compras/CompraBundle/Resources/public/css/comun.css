@@ -1,0 +1,73 @@
+
+footer {
+    clear: both;
+}
+
+/* ===========================================================================
+   Zona lateral
+   ======================================================================== */
+aside {
+    font-size: 13px;
+}
+
+aside h2 {
+    font-size: 16px;
+    margin-bottom: .25em;
+}
+
+aside a {
+    text-decoration: none;
+}
+aside:hover a {
+    text-decoration: underline;
+}
+
+aside ul {
+    margin-top: .25em;
+}
+
+aside section {
+    margin-bottom: 1em;
+}
+
+/* ===========================================================================
+   Pie de página
+   ======================================================================== */
+footer {
+    color: #999;
+    border-top: 1px solid #CCC;
+    font-size: 13px;
+    padding: 1em;
+    position: relative;
+}
+
+footer a {
+    color: #999;
+    padding: 0 1em;
+}
+footer:hover a {
+    color: #11C;
+}
+
+footer #idioma {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+}
+/* ===========================================================================
+   Mensajes flash
+   ======================================================================== */
+p.flash {
+    background: #DCDCDC;
+    margin-bottom: 1em;
+    padding: .5em 1em;
+}
+
+p.flash-info {
+    background: #090;
+    color: #FFF;
+}
+p.flash-error {
+    background: #C00;
+    color: #FFF;
+}
