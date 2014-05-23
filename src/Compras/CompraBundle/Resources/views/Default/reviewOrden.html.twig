@@ -1,7 +1,7 @@
 {% extends '::frontend.html.twig' %}
 
 {% block title %}Compras, cada día ofertas increíbles en tu ciudad con descuentos de hasta el 90%{% endblock %}
-{% block id 'cart_summary' %}
+{% block id 'orden_review' %}
 
 {% block navbar %}
     {% include 'CompraBundle:Default:navbarFixed.html.twig' %}
@@ -15,7 +15,7 @@
     </br>
 </div>
     
-<h4>{{ "Carrito de Compra" | trans }}</h4>
+<h4>{{ "Revisa tú orden antes de comprar" | trans }}</h4>
 
 <table class="table">
     <thead>
@@ -24,7 +24,6 @@
             <th>Cantidad</th>
             <th>Precio</th>
             <th>Total</th>
-            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -40,22 +39,6 @@
             <td>{{ item.cantidad }}</td>
             <td>{{ item.precioUnitario | number_format(2, ',', '.') }} Bs</td>
             <td>{{ precio | number_format(2, ',', '.') }} Bs</td>
-            <td>
-                <div>
-                    <a href="{{ path('shopping_cart_updateitem', { 'id': item.id }) }}">
-                        <button type="button" class="btn btn-small">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                    </a>
-                </div>
-                <div>
-                    <a href="{{ path('shopping_cart_removeitem', { 'id': item.id }) }}">
-                        <button type="button" class="btn btn-small">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                    </a>
-                </div>
-            </td>
         </tr>
 {% else %}
     <tr><td>NO HAY ITEMS</tr></tr>
@@ -63,10 +46,10 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="5" align="right"><b>Subtotal: </b>{{ total | number_format(2, ',', '.') }} Bs</div></td>
+            <td colspan="5" align="right"><b>{{ "Orden Total" | trans }}: </b>{{ total | number_format(2, ',', '.') }} Bs</div></td>
         </tr>
         <tr>
-            <td colspan="5" align="right"><a href="{{ path('orden_review', { 'id': cart } ) }}"><button type="button" class="btn btn-primary btn-lg">{{ "Comprar" | trans }}</button></a></td>
+            <td colspan="5" align="right"><a href="{{ path('orden_create', { 'id': cart } ) }}"><button type="button" class="btn btn-primary btn-lg">Comprar</button></a></td>
         </tr>
     </tfoot>
 </table>

@@ -23,3 +23,11 @@ ver_productos:
 producto_listar:
     pattern:  /product/listar
     defaults: { _controller: CompraBundle:Default:listar }
+    
+orden_review:
+    pattern:  /orden/{id}/review
+    defaults: { _controller: CompraBundle:Default:reviewOrden }
+    
+orden_create:
+    pattern:  /orden/{id}/create
+    defaults: { _controller: CompraBundle:Default:createOrden }

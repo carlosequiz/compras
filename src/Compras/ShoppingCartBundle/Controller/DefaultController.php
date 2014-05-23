@@ -31,36 +31,42 @@ class DefaultController extends Controller
         
         $producto = $em->getRepository('CompraBundle:Producto')->find($producto_id);
         
+        $em->getConnection()->beginTransaction(); // suspend auto-commit
+        try {
+            if(null == $cart)
+            {
+                $cart = new Cart();
+
+                $cart->setItemsTotal(0);
+                $cart->setEstado(1);
+                $cart->setUsuario($usuario);
+
+                $em->persist($cart);
+            }
+            
+            $cartItem = new CartItem();
         
-        if(null == $cart)
-        {
-            $cart = new Cart();
+            $cartItem->setCart($cart);
+            $cartItem->setProducto($producto);
+            $cartItem->setCantidad(1);
+            $cartItem->setPrecioUnitario($producto->getPrecio());
+
+            $em->persist($cartItem);
+
+            $total = $cart->getItemsTotal() + 1;
             
-            $cart->setItemsTotal(0);
-            $cart->setEstado(1);
-            $cart->setUsuario($usuario);
-            
+            $cart->setItemsTotal($total);
+
             $em->persist($cart);
+
             $em->flush();
+            
+            $em->getConnection()->commit();
+        } catch (Exception $e) {
+            $em->getConnection()->rollback();
+            throw $e;
         }
-        
-        
-        $cartItem = new CartItem();
-        
-        $cartItem->setCart($cart);
-        $cartItem->setProducto($producto);
-        $cartItem->setCantidad(1);
-        $cartItem->setPrecioUnitario(12.2);
-        
-        $em->persist($cartItem);
-        $em->flush();
-        
-        $total = $cart->getItemsTotal();
-        $cart->setItemsTotal($total++);
-        
-        $em->persist($cart);
-        $em->flush();
-        
+               
         return $this->redirect($this->generateUrl('shopping_cart_summary'));
     }
     

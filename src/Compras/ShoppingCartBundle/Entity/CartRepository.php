@@ -28,4 +28,21 @@ class CartRepository extends EntityRepository
         
         return $consulta->getResult();
     }
+    
+    public function findCartItemsReview($cart_id = 0)
+    {
+        $em = $this->getEntityManager();
+        
+        $consulta = $em->createQuery('
+                SELECT  i, p
+                  FROM ShoppingCartBundle:CartItem i
+                  JOIN i.cart c
+                  JOIN i.producto p
+                 WHERE c.id = :cart_id
+                   AND c.estado = 1');
+                
+        $consulta->setParameter('cart_id', $cart_id);
+        
+        return $consulta->getResult();
+    }
 }

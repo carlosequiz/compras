@@ -3,6 +3,7 @@
 namespace Compras\CompraBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
@@ -156,5 +157,109 @@ class DefaultController extends Controller
                     'productos' => $productos
         ));
         
+    }
+    
+    /**
+     * Permite revisar una orden antes de crearla
+     *
+     */
+    public function reviewOrdenAction($id)
+    {   
+        $usuario = $this->get('security.context')->getToken()->getUser();
+        $cart_id = $id;
+
+        // Solo pueden comprar los usuarios registrados y logueados
+        if (null == $usuario || !$this->get('security.context')->isGranted('ROLE_USUARIO')) {
+            $this->get('session')->getFlashBag()->add('info',
+                'Antes de comprar debes registrarte o conectarte con tu usuario y contraseña.'
+            );
+
+            return $this->redirect($this->generateUrl('usuario_login'));
+        }
+        
+        $em = $this->get('doctrine.orm.entity_manager');
+        
+        $items = $em->getRepository('ShoppingCartBundle:Cart')->findCartItemsReview($cart_id);
+                
+        if(!$items)
+        {
+            throw new NotFoundHttpException('Ocurrió un error en la búsqueda del carrito de compras!');
+        }
+        
+        return $this->render('CompraBundle:Default:reviewOrden.html.twig', array(
+            'items' => $items,
+        ));
+    }
+    
+    /**
+     * Crear una orden
+     *
+     */
+    public function createOrdenAction($id)
+    {   
+        $usuario = $this->get('security.context')->getToken()->getUser();
+        $cart_id = $id;
+
+        // Solo pueden comprar los usuarios registrados y logueados
+        if (null == $usuario || !$this->get('security.context')->isGranted('ROLE_USUARIO')) {
+            $this->get('session')->getFlashBag()->add('info',
+                'Antes de comprar debes registrarte o conectarte con tu usuario y contraseña.'
+            );
+
+            return $this->redirect($this->generateUrl('usuario_login'));
+        }
+        
+        $em = $this->get('doctrine.orm.entity_manager');
+        
+        $items = $em->getRepository('ShoppingCartBundle:Cart')->findCartItemsReview($cart_id);
+                
+        if(!$items)
+        {
+            throw new NotFoundHttpException('Ocurrió un error en la creación de la orden de compras!');
+        }
+        
+        $em->getConnection()->beginTransaction(); // suspend auto-commit
+        try {
+            $order = new Orden();
+
+            $order->setDireccionEnvioId(1);
+            $cart->setDireccionFacturacionId(1);
+            $cart->setUsuario($usuario);
+
+            $em->persist($cart);
+            
+            $cartItem = new CartItem();
+        
+            $cartItem->setCart($cart);
+            $cartItem->setProducto($producto);
+            $cartItem->setCantidad(1);
+            $cartItem->setPrecioUnitario($producto->getPrecio());
+
+            $em->persist($cartItem);
+
+            $total = $cart->getItemsTotal() + 1;
+            
+            $cart->setItemsTotal($total);
+
+            $em->persist($cart);
+
+            $em->flush();
+            
+            $em->getConnection()->commit();
+        } catch (Exception $e) {
+            $em->getConnection()->rollback();
+            throw $e;
+        }
+        
+        
+        
+        foreach ($items as $item)
+        {
+            $ordenItem = new OrdenItem();
+        }
+        
+        return $this->render('CompraBundle:Default:successOrden.html.twig', array(
+            'items' => $items,
+        ));
     }
 }

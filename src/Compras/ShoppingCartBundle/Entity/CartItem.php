@@ -3,6 +3,7 @@
 namespace Compras\ShoppingCartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints AS Assert;
 
 /**
  * CartItem
@@ -31,7 +32,8 @@ class CartItem
     /**
      * @var string
      *
-     * @ORM\Column(name="precio_unitario", type="decimal")
+     * @ORM\Column(name="precio", type="decimal", scale=2)
+     * @Assert\Range(min = 0)
      */
     private $precioUnitario;
     
