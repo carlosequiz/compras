@@ -4,6 +4,8 @@ namespace Compras\CompraBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Compras\CompraBundle\Entity\Orden;
+use Compras\CompraBundle\Entity\OrdenItem;
 
 class DefaultController extends Controller
 {
@@ -223,25 +225,27 @@ class DefaultController extends Controller
             $order = new Orden();
 
             $order->setDireccionEnvioId(1);
-            $cart->setDireccionFacturacionId(1);
-            $cart->setUsuario($usuario);
+            $order->setDireccionFacturacionId(1);
+            $order->setPagoId(1);
+            $order->setUsuario($usuario);
+            $order->setNumero('xxxx-111');
+            $order->setEstadoId(1);
+            $order->setItemsTotal(count($items));
+            $order->setCreatedAt();
+            $order->setMoneda('BSF');
 
-            $em->persist($cart);
+            $em->persist($order);
             
-            $cartItem = new CartItem();
-        
-            $cartItem->setCart($cart);
-            $cartItem->setProducto($producto);
-            $cartItem->setCantidad(1);
-            $cartItem->setPrecioUnitario($producto->getPrecio());
-
-            $em->persist($cartItem);
-
-            $total = $cart->getItemsTotal() + 1;
-            
-            $cart->setItemsTotal($total);
-
-            $em->persist($cart);
+            foreach ($items as $item)
+            {
+                $orderItem = new OrdenItem();
+                
+                $orderItem->setOrden($order);
+                $orderItem->setCantidad($item->getCantidad());
+                $orderItem->setPrecioUnitario($item->getPrecioUnitario());
+                
+                $em->persist($orderItem);
+            }
 
             $em->flush();
             
@@ -250,14 +254,7 @@ class DefaultController extends Controller
             $em->getConnection()->rollback();
             throw $e;
         }
-        
-        
-        
-        foreach ($items as $item)
-        {
-            $ordenItem = new OrdenItem();
-        }
-        
+
         return $this->render('CompraBundle:Default:successOrden.html.twig', array(
             'items' => $items,
         ));

@@ -98,6 +98,12 @@ class Usuario implements UserInterface
      * @ORM\JoinColumn(name="id", referencedColumnName="usuario_id")
      */
     protected $carts;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Compras\CompraBundle\Entity\Orden", mappedBy="usuario")
+     * @ORM\JoinColumn(name="id", referencedColumnName="usuario_id")
+     */
+    protected $ordenes;
 
     
     public function __construct()
@@ -400,5 +406,39 @@ class Usuario implements UserInterface
     public function getCarts()
     {
         return $this->carts;
+    }
+    
+    
+    /**
+     * Add ordenes
+     *
+     * @param \Compras\CompraBundle\Entity\Orden $ordenes
+     * @return Usuario
+     */
+    public function addOrden(\Compras\CompraBundle\Entity\Orden $ordenes)
+    {
+        $this->ordenes[] = $ordenes;
+
+        return $this;
+    }
+
+    /**
+     * Remove ordenes
+     *
+     * @param \Compras\CompraBundle\Entity\Orden $ordenes
+     */
+    public function removeOrden(\Compras\CompraBundle\Entity\Orden $ordenes)
+    {
+        $this->ordenes->removeElement($ordenes);
+    }
+
+    /**
+     * Get ordenes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOrdenes()
+    {
+        return $this->ordenes;
     }
 }

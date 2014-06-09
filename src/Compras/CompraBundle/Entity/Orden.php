@@ -3,6 +3,7 @@
 namespace Compras\CompraBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Orden
@@ -49,13 +50,6 @@ class Orden
      * @ORM\Column(name="coupon_id", type="integer", nullable=true)
      */
     private $couponId;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="usuario_id", type="integer")
-     */
-    private $usuarioId;
 
     /**
      * @var string
@@ -126,6 +120,12 @@ class Orden
      * @ORM\Column(name="envio_estado", type="string", length=255, nullable=true)
      */
     private $envioEstado;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Compras\UsuarioBundle\Entity\Usuario", inversedBy="ordenes")
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     */
+    protected $usuario;
     
     /**
      * @ORM\OneToMany(targetEntity="OrdenItem", mappedBy="orden")
@@ -547,5 +547,28 @@ class Orden
     public function getDeleteAt()
     {
         return $this->delete_at;
+    }
+    
+    /**
+     * Set usuario
+     *
+     * @param \Compras\UsuarioBundle\Entity\Usuario $usuario
+     * @return Orden
+     */
+    public function setUsuario(\Compras\UsuarioBundle\Entity\Usuario $usuario = null)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario
+     *
+     * @return \Compras\UsuarioBundle\Entity\Usuario 
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
     }
 }

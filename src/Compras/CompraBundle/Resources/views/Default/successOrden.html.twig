@@ -1,0 +1,32 @@
+{% extends '::frontend.html.twig' %}
+
+{% block title %}Compras, cada día ofertas increíbles en tu ciudad con descuentos de hasta el 90%{% endblock %}
+{% block id 'orden_review' %}
+
+{% block navbar %}
+    {% include 'CompraBundle:Default:navbarFixed.html.twig' %}
+{% endblock %}
+
+{% block article %}
+
+<div class="container-fluid">
+
+<div>
+    </br>
+</div>
+    
+<h4>{{ "SU ORDEN SE GENERÓ CON EXITO" | trans }}</h4>
+
+{% endblock %}
+
+{% block aside %}
+    <section id="login">
+        {{ render_esi(controller('UsuarioBundle:Default:cajaLogin', { 'id': block('id') })) }}
+    </section>
+
+    <section id="condiciones">
+        <h2>Condiciones generales</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </section>
+{% endblock %}
